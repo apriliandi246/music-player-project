@@ -1,14 +1,23 @@
 <script>
+   import { scale } from "svelte/transition";
+   import { songId } from "../store/music.js";
+
+   export let song;
+
+   function handleChoose(id) {
+      $songId = id;
+   }
 </script>
 
 <style>
    .music {
       padding: 23px;
       display: flex;
+      border-radius: 4px;
       margin-bottom: 30px;
       align-items: center;
       box-sizing: border-box;
-      background-color: #ffffff;
+      background-color: #f8f7f7;
       justify-content: space-between;
       box-shadow: 0 0 2px 2px #0000001a;
    }
@@ -43,12 +52,12 @@
    }
 </style>
 
-<div class="music">
+<div class="music" in:scale>
    <div class="music__data">
-      <h1 class="music__title">Title</h1>
-      <p class="music__by">by : <span>Somebody</span></p>
-      <span class="music__duration">2:46</span>
+      <h1 class="music__title">{song.title}</h1>
+      <p class="music__by">by : <span>{song.name}</span></p>
+      <span class="music__duration">{song.duration}</span>
    </div>
 
-   <div class="music__btn">▶</div>
+   <div class="music__btn" on:click={() => handleChoose(song.id)}>▶</div>
 </div>

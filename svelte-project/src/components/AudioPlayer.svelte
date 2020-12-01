@@ -1,8 +1,46 @@
+<script>
+   import { scale } from "svelte/transition";
+   import { songId } from "../store/music.js";
+
+   export let songs;
+
+   let audio;
+   let isLoop = false;
+
+   $: currentSong = songs.filter((song) => song.id === $songId);
+
+   function handleEndMusic() {
+      if (isLoop === true) return audio.play();
+
+      if ($songId === 5) {
+         $songId = 1;
+      } else {
+         $songId += 1;
+      }
+   }
+
+   function onPreviousSong() {
+      if ($songId === 1) {
+         $songId = 5;
+      } else {
+         $songId -= 1;
+      }
+   }
+
+   function onNextSong() {
+      if ($songId === 5) {
+         $songId = 1;
+      } else {
+         $songId += 1;
+      }
+   }
+</script>
+
 <style>
    audio {
       width: 100%;
       outline: none;
-      background-color: #f9f9f9;
+      background-color: #f8f7f7;
       box-shadow: 0 0 0.8px 0.8px #0000001a;
    }
 
@@ -11,7 +49,7 @@
    }
 
    audio::-webkit-media-controls-panel {
-      background-color: #f9f9f9;
+      background-color: #f8f7f7;
    }
 
    audio::-webkit-media-controls-current-time-display,
@@ -31,8 +69,9 @@
    }
 
    .audio-area {
+      border-radius: 4px;
       margin-bottom: 35px;
-      background-color: #ffffff;
+      background-color: #f8f7f7;
       box-shadow: 0 0 2px 2px #0000001a;
    }
 
@@ -89,23 +128,30 @@
 
 <!-- svelte-ignore a11y-media-has-caption -->
 <div class="audio-area">
-   <div class="audio-menu">
-      <div class="menu">
-         <span class="prev">⇦</span>
-         <span class="next">⇨</span>
+   {#if $songId !== null}
+      <div class="audio-menu" in:scale>
+         <div class="menu">
+            <span class="prev" on:click={onPreviousSong}>⇦</span>
+            <span class="next" on:click={onNextSong}>⇨</span>
+         </div>
+
+         <div class="input-loop">
+            <input
+               id="loop"
+               type="checkbox"
+               on:change={() => (isLoop = !isLoop)} />
+            <label for="loop">loop</label>
+         </div>
       </div>
 
-      <div class="input-loop">
-         <input type="checkbox" id="loop" />
-         <label for="loop">loop</label>
-      </div>
-   </div>
-
-   <h1 class="title">fur elise (Ludwig van Beethoven)</h1>
+      <h1 class="title" in:scale>{currentSong[0].title}</h1>
+   {/if}
 
    <audio
       controls
+      bind:this={audio}
       preload="metadata"
+      on:ended={handleEndMusic}
       controlsList="nodownload"
-      src="https://raw.githubusercontent.com/sveltejs/assets/master/music/mozart.mp3" />
+      src={$songId !== null ? currentSong[0].source : null} />
 </div>

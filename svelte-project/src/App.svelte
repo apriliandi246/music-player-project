@@ -1,8 +1,14 @@
 <script>
+   import { onMount } from "svelte";
+   import data from "./data/songs.js";
    import Music from "./components/Music.svelte";
    import AudioPlayer from "./components/AudioPlayer.svelte";
 
-   let musics = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+   let songs = [];
+
+   onMount(() => {
+      songs = data;
+   });
 </script>
 
 <style>
@@ -61,9 +67,9 @@
 </style>
 
 <div class="container">
-   <AudioPlayer />
+   <AudioPlayer {songs} />
 
-   {#each musics as music}
-      <Music />
+   {#each songs as song}
+      <Music {song} />
    {/each}
 </div>
