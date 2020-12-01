@@ -1,30 +1,69 @@
 <script>
-	export let name;
+   import Music from "./components/Music.svelte";
+   import AudioPlayer from "./components/AudioPlayer.svelte";
+
+   let musics = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
-
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
+   .container {
+      width: 90%;
+      margin: 50px auto;
+   }
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
+   @media screen and (min-width: 650px) {
+      .container {
+         width: 80%;
+      }
+   }
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+   @media screen and (min-width: 800px) {
+      .container {
+         width: 70%;
+      }
+   }
+
+   @media screen and (min-width: 950px) {
+      .container {
+         width: 60%;
+      }
+   }
+
+   @media screen and (min-width: 1010px) {
+      .container {
+         width: 55%;
+      }
+   }
+
+   @media screen and (min-width: 1250px) {
+      .container {
+         width: 50%;
+      }
+   }
+
+   @media screen and (min-width: 1440px) {
+      .container {
+         width: 40%;
+      }
+   }
+
+   @media screen and (min-width: 1650px) {
+      .container {
+         width: 35%;
+      }
+   }
+
+   @media screen and (min-width: 1850px) {
+      .container {
+         width: 30%;
+      }
+   }
 </style>
+
+<div class="container">
+   <AudioPlayer />
+
+   {#each musics as music}
+      <Music />
+   {/each}
+</div>
