@@ -1,6 +1,6 @@
 <script>
    import { scale } from "svelte/transition";
-   import { songId } from "../store/music.js";
+   import { songId } from "../store/store.js";
 
    export let songs;
 
@@ -11,28 +11,15 @@
 
    function handleEndMusic() {
       if (isLoop === true) return audio.play();
-
-      if ($songId === 5) {
-         $songId = 1;
-      } else {
-         $songId += 1;
-      }
+      $songId === 5 ? ($songId = 1) : ($songId += 1);
    }
 
    function onPreviousSong() {
-      if ($songId === 1) {
-         $songId = 5;
-      } else {
-         $songId -= 1;
-      }
+      $songId === 1 ? ($songId = 5) : ($songId -= 1);
    }
 
    function onNextSong() {
-      if ($songId === 5) {
-         $songId = 1;
-      } else {
-         $songId += 1;
-      }
+      $songId === 5 ? ($songId = 1) : ($songId += 1);
    }
 </script>
 
@@ -117,6 +104,7 @@
       margin-bottom: 34px;
       letter-spacing: 1.2px;
       word-wrap: break-word;
+      font-family: system-ui;
    }
 
    .prev:hover,

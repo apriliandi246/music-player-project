@@ -1,6 +1,6 @@
 <script>
    import { scale } from "svelte/transition";
-   import { songId } from "../store/music.js";
+   import { songId } from "../store/store.js";
 
    export let song;
 
@@ -11,12 +11,13 @@
 
 <style>
    .music {
-      padding: 23px;
+      padding: 18px;
       display: flex;
-      border-radius: 4px;
+      border-radius: 3px;
       margin-bottom: 30px;
       align-items: center;
       box-sizing: border-box;
+      transition: transform 0.1s;
       background-color: #f8f7f7;
       justify-content: space-between;
       box-shadow: 0 0 2px 2px #0000001a;
@@ -26,6 +27,7 @@
       font-size: 1.4rem;
       font-weight: bold;
       letter-spacing: 1px;
+      font-family: system-ui;
    }
 
    .music__by {
@@ -33,6 +35,7 @@
       font-weight: 500;
       margin-bottom: 14px;
       letter-spacing: 0.8px;
+      font-family: system-ui;
    }
 
    .music__duration {
@@ -47,8 +50,8 @@
       transition: transform 0.1s;
    }
 
-   .music__btn:hover {
-      transform: scale(1.2);
+   .music:hover {
+      transform: scale(1.02);
    }
 </style>
 
@@ -59,5 +62,7 @@
       <span class="music__duration">{song.duration}</span>
    </div>
 
-   <div class="music__btn" on:click={() => handleChoose(song.id)}>▶</div>
+   <div class="music__btn" on:click={() => handleChoose(song.id)}>
+      {$songId !== null && song.id === $songId ? '⏸' : '⏩'}
+   </div>
 </div>

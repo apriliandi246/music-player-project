@@ -6,14 +6,12 @@
 
    let songs = [];
 
-   onMount(() => {
-      songs = data;
-   });
+   onMount(() => (songs = data));
 </script>
 
 <style>
    .container {
-      width: 90%;
+      width: 94%;
       margin: 50px auto;
    }
 
