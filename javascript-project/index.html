@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="./css/style.css" />
+      <script defer src="./js/script.js"></script>
+      <title>learn-audio</title>
+   </head>
+   <body>
+      <div class="func">
+         <p class="prev">previous</p>
+         <p class="play-pause">Play</p>
+         <p class="next">next</p>
+      </div>
+
+      <div class="container">
+         <audio
+            controls
+            preload="metadata"
+            src="./data/1.mp3"
+            controlsList="nodownload"
+         ></audio>
+      </div>
+
+      <div class="looping">
+         <input type="checkbox" id="loop" />
+         <label for="loop">Loop</label>
+      </div>
+   </body>
+</html>
