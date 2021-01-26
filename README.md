@@ -1,1 +1,1 @@
-### Simple music player project built with Javascipt and Svelte.js
+# Simple music player project built with Javascipt and Svelte.js
